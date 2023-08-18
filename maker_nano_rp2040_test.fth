@@ -26,7 +26,7 @@
 \     this program overrides GPIO0 and GPIO1. This can be stopped by making
 \     changes to the array `LEDs` and the word `startup_loop`.
 \
-\   - To stop the task use main-task @ stop
+\   - To stop the task use demo-task @ stop
 \
 \   - See the Zeptoforth Wiki and documentation for more information on
 \     Zeptoforth
@@ -443,16 +443,16 @@ variable led_state  \ I added this because the original code didn't work as expe
 ;
 
 task import
-variable main-task
+variable demo-task
 : start_main
     \ spawn arguments ( task-args, task-xt, dict-size, stack-size, ret-size -- task )
-    0 ['] main 256 128 512 spawn main-task ! 
+    0 ['] main 256 128 512 spawn demo-task ! 
 
     \ this version will spawn it on the second core on the RP2040. Comment out
     \ other spawn line to avoid conflicts
-    \ 0 ['] main 256 128 512 1 spawn-on-core main-task !
+    \ 0 ['] main 256 128 512 1 spawn-on-core demo-task !
 
-    main-task @ run
+    demo-task @ run
 ;
 
 
